@@ -1,7 +1,9 @@
 ''' Roll Dice
-1 - Create a loop where users can roll two dices. Show on the screen the number of the dice '''
+1 - Create a loop where users can roll two dices. Show on the screen the number of the dice
+2 - Improve the code to allow two players '''
 
 import random
+from operator import itemgetter
 
 def roll_dices():
     first_dice = [random.randint(1,6)]
@@ -19,7 +21,15 @@ while loop:
         menu = int(input('Choose an option: '))
         if menu == 1:
             print('Rolling dices...')
-            print('The result was '+ str(roll_dices()))
+            players = {
+                'player_1': roll_dices(),
+                'player_2': roll_dices(),
+            }
+
+            print('==== RANKING ====')
+            print('The first player got ' + str(players['player_1']))
+            print('The second player got ' + str(players['player_2']))
+
         elif menu == 2:
             loop = False
             print('Exiting...')
