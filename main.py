@@ -1,6 +1,7 @@
 ''' Roll Dice
 1 - Create a loop where users can roll two dices. Show on the screen the number of the dice
-2 - Improve the code to allow two players '''
+2 - Improve the code to allow two players
+3 - Let the user decide how many players and show a ranking at the end '''
 
 import random
 from operator import itemgetter
@@ -20,15 +21,21 @@ while loop:
     try:
         menu = int(input('Choose an option: '))
         if menu == 1:
-            print('Rolling dices...')
-            players = {
-                'player_1': roll_dices(),
-                'player_2': roll_dices(),
-            }
 
+            num_players = int(input('How many players? '))
+            print('Rolling dices...')
+
+            totalScore = dict()
+            for i in range(0, num_players):
+                move = roll_dices()
+                print('Player ', i+1 , 'got: ', move)
+                sumScore = {'Player '+str(i+1): sum(move)}
+                totalScore.update(sumScore)
+
+            print('')
             print('==== RANKING ====')
-            print('The first player got ' + str(players['player_1']))
-            print('The second player got ' + str(players['player_2']))
+            ranking = sorted(totalScore.items(), key=lambda x: x[1], reverse=True)
+            print(ranking)
 
         elif menu == 2:
             loop = False
